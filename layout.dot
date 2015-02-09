@@ -2,74 +2,74 @@ digraph {
   foyer [cluster = 1, size=3]
   foyer -> stairs1
 
-  stairs1 [cluster = 2]
+  stairs1 [cluster = 2, size=12]
   stairs1 -> foyer
   stairs1 -> landing
 
-  landing [cluster = 3]
+  landing [cluster = 3, size=5]
   landing -> stairs1
   landing -> hallway1
   landing -> livingroom
   landing -> frontporch
   landing -> stairs2
 
-  frontporch [cluster = 4]
+  frontporch [cluster = 4, size=5]
   frontporch -> landing
 
-  hallway1 [cluster = 5]
+  hallway1 [cluster = 5, size=3]
   hallway1 -> landing
   hallway1 -> bathroom1
   hallway1 -> bedroom1
   hallway1 -> diningroom
   hallway1 -> kitchen
 
-  bathroom1 [cluster = 6]
+  bathroom1 [cluster = 6, size=2]
   bathroom1 -> hallway1
 
-  bedroom1 [cluster = 7]
+  bedroom1 [cluster = 7, size=7]
   bedroom1 -> hallway1
 
-  livingroom [cluster = 8]
+  livingroom [cluster = 8, size=9]
   livingroom -> landing
   livingroom -> diningroom
 
-  diningroom [cluster = 9]
+  diningroom [cluster = 9, size=7]
   diningroom -> hallway1
   diningroom -> livingroom
   diningroom -> kitchen
 
-  kitchen [cluster = 10]
+  kitchen [cluster = 10, size=9]
   kitchen -> hallway1
   kitchen -> diningroom
   kitchen -> bedroom2
   kitchen -> backporch
 
-  bedroom2 [cluster = 11]
+  bedroom2 [cluster = 11, size=7]
   bedroom2 -> kitchen
 
-  backporch [cluster = 12]
+  backporch [cluster = 12, size=5]
   backporch -> kitchen
 
-  stairs2 [cluster = 13]
+  stairs2 [cluster = 13, size=12]
   stairs2 -> landing
   stairs2 -> hallway2
 
-  hallway2 [cluster = 14]
+  hallway2 [cluster = 14, size=5]
   hallway2 -> stairs2
   hallway2 -> office
   hallway2 -> bathroom2
   hallway2 -> masterbedroom
 
-  office [cluster = 15]
+  office [cluster = 15, size=7]
   office -> hallway2
 
-  bathroom2 [cluster = 16]
+  bathroom2 [cluster = 16, size=2]
   bathroom2 -> hallway2
 
-  masterbedroom [cluster = 17]
+  masterbedroom [cluster = 17, size=12]
   masterbedroom -> hallway2
   masterbedroom -> masterbathroom
 
-  masterbathroom [cluster = 18]
+  masterbathroom [cluster = 18, size=7]
   masterbathroom -> masterbedroom
 }
