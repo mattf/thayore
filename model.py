@@ -4,6 +4,7 @@ class Node:
     def __init__(self, node):
         self.name = node.get_name()
         self.edges = {self: 1}
+        self.size = int(node.get('size') or 10)
 
     def __hash__(self):
         return hash(self.name)

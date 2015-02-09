@@ -1,5 +1,5 @@
 digraph {
-  foyer [cluster = 1]
+  foyer [cluster = 1, size=3]
   foyer -> stairs1
 
   stairs1 [cluster = 2]
