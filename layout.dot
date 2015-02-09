@@ -1,75 +1,75 @@
 digraph {
-  foyer
+  foyer [cluster = 1]
   foyer -> stairs1
 
-  stairs1
+  stairs1 [cluster = 2]
   stairs1 -> foyer
   stairs1 -> landing
 
-  landing
+  landing [cluster = 3]
   landing -> stairs1
   landing -> hallway1
   landing -> livingroom
   landing -> frontporch
   landing -> stairs2
 
-  frontporch
+  frontporch [cluster = 4]
   frontporch -> landing
 
-  hallway1
+  hallway1 [cluster = 5]
   hallway1 -> landing
   hallway1 -> bathroom1
   hallway1 -> bedroom1
   hallway1 -> diningroom
   hallway1 -> kitchen
 
-  bathroom1
+  bathroom1 [cluster = 6]
   bathroom1 -> hallway1
 
-  bedroom1
+  bedroom1 [cluster = 7]
   bedroom1 -> hallway1
 
-  livingroom
+  livingroom [cluster = 8]
   livingroom -> landing
   livingroom -> diningroom
 
-  diningroom
+  diningroom [cluster = 9]
   diningroom -> hallway1
   diningroom -> livingroom
   diningroom -> kitchen
 
-  kitchen
+  kitchen [cluster = 10]
   kitchen -> hallway1
   kitchen -> diningroom
   kitchen -> bedroom2
   kitchen -> backporch
 
-  bedroom2
+  bedroom2 [cluster = 11]
   bedroom2 -> kitchen
 
-  backporch
+  backporch [cluster = 12]
   backporch -> kitchen
 
-  stairs2
+  stairs2 [cluster = 13]
   stairs2 -> landing
   stairs2 -> hallway2
 
-  hallway2
+  hallway2 [cluster = 14]
   hallway2 -> stairs2
   hallway2 -> office
   hallway2 -> bathroom2
   hallway2 -> masterbedroom
 
-  office
+  office [cluster = 15]
   office -> hallway2
 
-  bathroom2
+  bathroom2 [cluster = 16]
   bathroom2 -> hallway2
 
-  masterbedroom
+  masterbedroom [cluster = 17]
   masterbedroom -> hallway2
   masterbedroom -> masterbathroom
 
-  masterbathroom
+  masterbathroom [cluster = 18]
   masterbathroom -> masterbedroom
 }

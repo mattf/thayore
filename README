@@ -1,3 +1,5 @@
+Display map with: gvmap.sh -Ae -Tpng layout.dot | display -
+
 ##
 ## TODO
 ##
