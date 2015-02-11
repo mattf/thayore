@@ -18,12 +18,16 @@ parser.add_option("-a", "--address", default="amq.topic",
                   help="Published events are sent to the given address")
 parser.add_option("-i", "--identity", default=None,
                   help="Identity of this process")
+parser.add_option("-s", "--seed", default=None,
+                  help="Random seed")
 opts, args = parser.parse_args()
 
 if args:
     nodes = model.load(args.pop(0))
 else:
     parser.error("model file required")
+
+random.seed(opts.seed)
 
 id = str(opts.identity or random.randint(0, 2**40))
 
