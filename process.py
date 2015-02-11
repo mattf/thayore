@@ -1,11 +1,27 @@
 import time
 import random
+import optparse
+
+from null import Null
 
 from qpid.messaging import Connection, Message, MessagingError
 
 import model
 
-nodes = model.load('layout.dot')
+
+parser = optparse.OptionParser(
+    "usage: %prog [options] <model.dot>",
+    description="Simulate a process moving within the given model")
+parser.add_option("-b", "--broker", default=None,
+                  help="If provided, events are published to the broker")
+parser.add_option("-a", "--address", default="amq.topic",
+                  help="Published events are sent to the given address")
+opts, args = parser.parse_args()
+
+if args:
+    nodes = model.load(args.pop(0))
+else:
+    parser.error("model file required")
 
 for n in nodes:
     print n.name, n.size, map(lambda n: n.name, n.edges)
@@ -16,29 +32,31 @@ def next(node):
 def move(node):
     return random.choice(filter(lambda n: n.name != node.name, node.edges.keys()))
 
-broker = "localhost:5672"
-address = "amq.topic"
-connection = Connection(broker)
-connection.open()
-session = connection.session()
-sender = session.sender(address)
+connection = opts.broker and Connection(opts.broker) or Null()
 
-node = random.choice(nodes)
-node = reduce(lambda n, x: n.name == 'foyer' and n or x, nodes)
-now = 0
-sample_rate = .5 # in seconds
-acceleration = 10
-move_barrier = 30 * 60 # in seconds
-distance = node.size
-while True:
-    now += sample_rate
-    print now, node.name
-    sender.send(Message([now, node.name]))
-    if distance:
-        distance-=1
-    else:
-        node = now % move_barrier == 0 and move(node) or next(node)
-        distance = node.size
-    time.sleep(sample_rate / acceleration)
+try:
+    connection.open()
+    session = connection.session()
+    sender = session.sender(opts.address)
+
+    node = random.choice(nodes)
+    node = reduce(lambda n, x: n.name == 'foyer' and n or x, nodes)
+    now = 0
+    sample_rate = .5 # in seconds
+    acceleration = 10
+    move_barrier = 30 * 60 # in seconds
+    distance = node.size
+    while True:
+        now += sample_rate
+        print now, node.name
+        sender.send(Message([now, node.name]))
+        if distance:
+            distance-=1
+        else:
+            node = now % move_barrier == 0 and move(node) or next(node)
+            distance = node.size
+        time.sleep(sample_rate / acceleration)
+except MessagingError, e:
+    print e
 
 connection.close()
