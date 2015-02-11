@@ -16,12 +16,16 @@ parser.add_option("-b", "--broker", default=None,
                   help="If provided, events are published to the broker")
 parser.add_option("-a", "--address", default="amq.topic",
                   help="Published events are sent to the given address")
+parser.add_option("-i", "--identity", default=None,
+                  help="Identity of this process")
 opts, args = parser.parse_args()
 
 if args:
     nodes = model.load(args.pop(0))
 else:
     parser.error("model file required")
+
+id = str(opts.identity or random.randint(0, 2**40))
 
 for n in nodes:
     print n.name, n.size, map(lambda n: n.name, n.edges)
@@ -48,8 +52,8 @@ try:
     distance = node.size
     while True:
         now += sample_rate
-        print now, node.name
-        sender.send(Message([now, node.name]))
+        print id, now, node.name
+        sender.send(Message([id, now, node.name]))
         if distance:
             distance-=1
         else:
