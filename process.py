@@ -52,8 +52,9 @@ try:
     distance = node.size
     while True:
         now += sample_rate
-        print id, now, node.name
-        sender.send(Message([id, now, node.name]))
+        event = [id, now, node.name]
+        print ",".join(map(str,event))
+        sender.send(Message(event))
         if distance:
             distance-=1
         else:
