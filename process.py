@@ -33,7 +33,7 @@ distance = node.size
 while True:
     now += sample_rate
     print now, node.name
-    sender.send(Message("%f, %s" % (now, node.name)))
+    sender.send(Message([now, node.name]))
     if distance:
         distance-=1
     else:
