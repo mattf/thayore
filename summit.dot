@@ -1,0 +1,252 @@
+digraph {
+  # Plaza Level
+  plaza_registration
+  plaza_meet_the_experts_briefing_center
+  plaza_game_of_drones
+  plaza_breakfast_lunch_overflow
+  plaza_rotunda
+  plaza_cust_testimonials
+  plaza_lobby_right
+  plaza_back_hallway
+  plaza_room_101
+  plaza_room_102
+  plaza_room_103
+  plaza_room_104
+  plaza_room_107
+  plaza_room_108
+  plaza_room_109
+  plaza_room_110
+  plaza_sponsor_mtg
+  plaza_stairs
+
+  plaza_registration -> plaza_meet_the_experts_briefing_center
+  plaza_registration -> plaza_rotunda
+  plaza_registration -> plaza_cust_testimonials
+
+  plaza_meet_the_experts_briefing_center -> plaza_registration
+  plaza_meet_the_experts_briefing_center -> plaza_cust_testimonials
+  plaza_meet_the_experts_briefing_center -> plaza_game_of_drones
+
+  plaza_game_of_drones -> plaza_meet_the_experts_briefing_center
+  plaza_game_of_drones -> plaza_breakfast_lunch_overflow
+
+  plaza_breakfast_lunch_overflow -> plaza_game_of_drones
+  plaza_breakfast_lunch_overflow -> plaza_lobby_right
+
+  plaza_rotunda -> plaza_registration
+  plaza_rotunda -> plaza_back_hallway
+  plaza_rotunda -> level2_rotunda
+
+  plaza_cust_testimonials -> plaza_registration
+  plaza_cust_testimonials -> plaza_meet_the_experts_briefing_center
+  plaza_cust_testimonials -> plaza_lobby_right
+  plaza_cust_testimonials -> plaza_room_107
+  plaza_cust_testimonials -> plaza_room_108
+  plaza_cust_testimonials -> plaza_room_109
+  plaza_cust_testimonials -> plaza_room_110
+
+  plaza_lobby_right -> plaza_cust_testimonials
+  plaza_lobby_right -> plaza_breakfast_lunch_overflow
+  plaza_lobby_right -> plaza_stairs
+  plaza_lobby_right -> plaza_back_hallway
+
+  plaza_back_hallway -> plaza_rotunda
+  plaza_back_hallway -> plaza_room_101
+  plaza_back_hallway -> plaza_room_102
+  plaza_back_hallway -> plaza_room_103
+  plaza_back_hallway -> plaza_room_104
+  plaza_back_hallway -> plaza_sponsor_mtg
+  plaza_back_hallway -> plaza_lobby_right
+
+  plaza_room_101 -> plaza_back_hallway
+
+  plaza_room_102 -> plaza_back_hallway
+
+  plaza_room_103 -> plaza_back_hallway
+
+  plaza_room_104 -> plaza_back_hallway
+
+  plaza_room_107 -> plaza_cust_testimonials
+
+  plaza_room_108 -> plaza_cust_testimonials
+
+  plaza_room_109 -> plaza_cust_testimonials
+
+  plaza_room_110 -> plaza_cust_testimonials
+
+  plaza_sponsor_mtg -> plaza_back_hallway
+
+  plaza_stairs -> plaza_lobby_right
+  plaza_stairs -> level2_stairs
+
+  # Level 2
+  level2_rotunda
+  level2_lobby_left
+  level2_cube
+  level2_general
+  level2_experimental_zone
+  level2_expo_left
+  level2_expo_right
+  level2_lunch_left
+  level2_lunch_right
+  level2_room_207
+  level2_room_208
+  level2_room_209
+  level2_lobby_right
+  level2_room_210
+  level2_devzone2
+  level2_room_206
+  level2_devzone1
+  level2_room_200
+  level2_back_hallway
+  level2_room_201
+  level2_room_202
+  level2_room_203
+  level2_room_204
+  level2_room_205
+  level2_stairs
+
+  level2_rotunda -> plaza_rotunda
+  level2_rotunda -> level2_lobby_left
+  level2_rotunda -> level2_back_hallway
+
+  level2_lobby_left -> level2_rotunda
+  level2_lobby_left -> level2_cube
+  level2_lobby_left -> level2_general
+  level2_lobby_left -> level2_experimental_zone
+
+  level2_cube -> level2_lobby_left
+
+  level2_general -> level2_lobby_left
+
+  level2_experimental_zone -> level2_lobby_left
+  level2_experimental_zone -> level2_expo_left
+  level2_experimental_zone -> level2_room_207
+  level2_experimental_zone -> level2_room_208
+  level2_experimental_zone -> level2_room_209
+  level2_experimental_zone -> level2_lobby_right
+
+  level2_expo_left -> level2_experimental_zone
+  level2_expo_left -> level2_lunch_left
+  level2_expo_left -> level2_expo_right
+
+  level2_expo_right -> level2_expo_left
+  level2_expo_right -> level2_lunch_right
+  level2_expo_right -> level2_lobby_right
+
+  level2_lunch_left -> level2_expo_left
+
+  level2_lunch_right -> level2_expo_right
+
+  level2_room_207 -> level2_experimental_zone
+
+  level2_room_208 -> level2_experimental_zone
+
+  level2_room_209 -> level2_experimental_zone
+
+  level2_lobby_right -> level2_stairs
+  level2_lobby_right -> level2_expo_right
+  level2_lobby_right -> level2_experimental_zone
+  level2_lobby_right -> level2_room_210
+  level2_lobby_right -> level2_back_hallway
+
+  level2_room_210 -> level2_lobby_right
+
+  level2_devzone2 -> level2_room_206
+  level2_devzone2 -> level2_back_hallway
+
+  level2_room_206 -> level2_devzone2
+
+  level2_devzone1 -> level2_room_200
+  level2_devzone1 -> level2_back_hallway
+
+  level2_room_200 -> level2_devzone1
+
+  level2_back_hallway -> level2_devzone1
+  level2_back_hallway -> level2_rotunda
+  level2_back_hallway -> level2_room_201
+  level2_back_hallway -> level2_room_202
+  level2_back_hallway -> level2_room_203
+  level2_back_hallway -> level2_room_204
+  level2_back_hallway -> level2_room_205
+  level2_back_hallway -> level2_devzone2
+  level2_back_hallway -> level2_lobby_right
+
+  level2_room_201 -> level2_back_hallway
+
+  level2_room_202 -> level2_back_hallway
+
+  level2_room_203 -> level2_back_hallway
+
+  level2_room_204 -> level2_back_hallway
+
+  level2_room_205 -> level2_back_hallway
+
+  level2_stairs -> plaza_stairs
+  level2_stairs -> level2_lobby_right
+  level2_stairs -> level3_stairs
+
+  # Level 3
+  level3_stairs
+  level3_lobby
+  level3_room_309
+  level3_room_310
+  level3_room_311
+  level3_room_312
+  level3_room_313
+  level3_back_hallway
+  level3_room_313
+  level3_room_302
+  level3_room_304
+  level3_room_306
+  level3_left_hallway
+  level3_devnation_ballroom
+  level3_devnation_meals
+  level3_hands_on_labs
+
+  level3_stairs -> level2_stairs
+  level3_stairs -> level3_lobby
+
+  level3_lobby -> level3_stairs
+  level3_lobby -> level3_back_hallway
+  level3_lobby -> level3_room_309
+  level3_lobby -> level3_room_310
+  level3_lobby -> level3_room_311
+  level3_lobby -> level3_room_312
+
+  level3_room_309 -> level3_lobby
+
+  level3_room_310 -> level3_lobby
+
+  level3_room_311 -> level3_lobby
+
+  level3_room_312 -> level3_lobby
+
+  level3_room_313 -> level3_lobby
+
+  level3_back_hallway -> level3_lobby
+  level3_back_hallway -> level3_room_313
+  level3_back_hallway -> level3_room_302
+  level3_back_hallway -> level3_room_304
+  level3_back_hallway -> level3_room_306
+  level3_back_hallway -> level3_left_hallway
+
+  level3_room_313 -> level3_back_hallway
+
+  level3_room_302 -> level3_back_hallway
+
+  level3_room_304 -> level3_back_hallway
+
+  level3_room_306 -> level3_back_hallway
+
+  level3_left_hallway -> level3_back_hallway
+  level3_left_hallway -> level3_devnation_ballroom
+  level3_left_hallway -> level3_devnation_meals
+  level3_left_hallway -> level3_hands_on_labs
+
+  level3_devnation_ballroom -> level3_left_hallway
+
+  level3_devnation_meals -> level3_left_hallway
+
+  level3_hands_on_labs -> level3_left_hallway
+}
