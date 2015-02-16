@@ -28,6 +28,8 @@ parser.add_option("-c", "--count", default=-1, type="int",
                   help="If provided, number of events to generate otherwise infinite")
 parser.add_option("-l", "--location", default=None,
                   help="Name of initial location")
+parser.add_option("-d", "--debug", default=False, action="store_true",
+                  help="Enable debug output")
 opts, args = parser.parse_args()
 
 if args:
