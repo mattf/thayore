@@ -26,6 +26,8 @@ parser.add_option("-q", "--quiet", default=False, action="store_true",
                   help="Silence per event console output")
 parser.add_option("-c", "--count", default=-1, type="int",
                   help="If provided, number of events to generate otherwise infinite")
+parser.add_option("-l", "--location", default=None,
+                  help="Name of initial location")
 opts, args = parser.parse_args()
 
 if args:
@@ -54,7 +56,7 @@ try:
     sender = session.sender(opts.address)
 
     node = random.choice(nodes)
-    node = reduce(lambda n, x: n.name == 'foyer' and n or x, nodes)
+    node = reduce(lambda n, x: n.name == opts.location and n or x, nodes)
     now = opts.time and opts.time or round(time.time())
     sample_rate = .5 # in seconds
     acceleration = 10
