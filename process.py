@@ -24,6 +24,8 @@ parser.add_option("-t", "--time", default=None,
                   help="Time (sec since EPOCH) for first event")
 parser.add_option("-q", "--quiet", default=False, action="store_true",
                   help="Silence per event console output")
+parser.add_option("-c", "--count", default=-1, type="int",
+                  help="If provided, number of events to generate otherwise infinite")
 opts, args = parser.parse_args()
 
 if args:
@@ -58,7 +60,7 @@ try:
     acceleration = 10
     move_barrier = 30 * 60 # in seconds
     distance = node.size
-    while True:
+    while opts.count < 0 or opts.count > 0:
         event = [id, now, node.name]
         if not opts.quiet:
             print ",".join(map(str,event))
@@ -70,6 +72,7 @@ try:
             distance = node.size
         time.sleep(sample_rate / acceleration)
         now += sample_rate
+        opts.count-=1
 except MessagingError, e:
     print e
 
