@@ -41,8 +41,9 @@ random.seed(opts.seed)
 
 id = str(opts.identity or random.randint(0, 2**40))
 
-for n in nodes:
-    print n.name, n.size, map(lambda n: n.name, n.edges)
+if opts.debug:
+    for n in nodes:
+        print n.name, n.size, map(lambda n: n.name, n.edges)
 
 def next(node):
     return random.choice(node.edges.keys())
