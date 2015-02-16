@@ -56,7 +56,8 @@ try:
     sender = session.sender(opts.address)
 
     node = random.choice(nodes)
-    node = reduce(lambda n, x: n.name == opts.location and n or x, nodes)
+    if opts.location:
+        node = reduce(lambda n, x: n.name == opts.location and n or x, nodes)
     now = opts.time and opts.time or round(time.time())
     sample_rate = .5 # in seconds
     acceleration = 10
