@@ -20,6 +20,8 @@ parser.add_option("-i", "--identity", default=None,
                   help="Identity of this process")
 parser.add_option("-s", "--seed", default=None,
                   help="Random seed")
+parser.add_option("-t", "--time", default=None,
+                  help="Time (sec since EPOCH) for first event")
 opts, args = parser.parse_args()
 
 if args:
@@ -49,13 +51,12 @@ try:
 
     node = random.choice(nodes)
     node = reduce(lambda n, x: n.name == 'foyer' and n or x, nodes)
-    now = 0
+    now = opts.time and int(opts.time) or round(time.time())
     sample_rate = .5 # in seconds
     acceleration = 10
     move_barrier = 30 * 60 # in seconds
     distance = node.size
     while True:
-        now += sample_rate
         event = [id, now, node.name]
         print ",".join(map(str,event))
         sender.send(Message(event))
@@ -65,6 +66,7 @@ try:
             node = now % move_barrier == 0 and move(node) or next(node)
             distance = node.size
         time.sleep(sample_rate / acceleration)
+        now += sample_rate
 except MessagingError, e:
     print e
 
