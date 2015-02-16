@@ -20,7 +20,7 @@ parser.add_option("-i", "--identity", default=None,
                   help="Identity of this process")
 parser.add_option("-s", "--seed", default=None,
                   help="Random seed")
-parser.add_option("-t", "--time", default=None,
+parser.add_option("-t", "--time", default=None, type="int",
                   help="Time (sec since EPOCH) for first event")
 parser.add_option("-q", "--quiet", default=False, action="store_true",
                   help="Silence per event console output")
@@ -55,7 +55,7 @@ try:
 
     node = random.choice(nodes)
     node = reduce(lambda n, x: n.name == 'foyer' and n or x, nodes)
-    now = opts.time and int(opts.time) or round(time.time())
+    now = opts.time and opts.time or round(time.time())
     sample_rate = .5 # in seconds
     acceleration = 10
     move_barrier = 30 * 60 # in seconds
