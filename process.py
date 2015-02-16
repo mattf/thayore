@@ -22,6 +22,8 @@ parser.add_option("-s", "--seed", default=None,
                   help="Random seed")
 parser.add_option("-t", "--time", default=None,
                   help="Time (sec since EPOCH) for first event")
+parser.add_option("-q", "--quiet", default=False, action="store_true",
+                  help="Silence per event console output")
 opts, args = parser.parse_args()
 
 if args:
@@ -58,7 +60,8 @@ try:
     distance = node.size
     while True:
         event = [id, now, node.name]
-        print ",".join(map(str,event))
+        if not opts.quiet:
+            print ",".join(map(str,event))
         sender.send(Message(event))
         if distance:
             distance-=1
