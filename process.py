@@ -63,11 +63,10 @@ try:
     distance = node.size
     msg = Message()
     while opts.count < 0 or opts.count > 0:
-        event = [id, now, node.name]
-        if not opts.quiet:
-            print ",".join(map(str,event))
+        event = {'scannerID': node.name, 'uuid': id, 'time': now}
+        print event
         msg.address = opts.address
-        msg.body = event
+        msg.properties = event
         mng.put(msg)
         mng.send()
         if distance:
