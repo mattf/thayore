@@ -3,7 +3,7 @@ Display map with: gvmap.sh -Ae -Tpng layout.dot | display -
 Simulate a single process: python process.py <model.dot>
 
 Dependencies:
- * qpid-python
+ * qpid-proton
  * pydot
  * null
 
