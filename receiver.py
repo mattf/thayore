@@ -1,28 +1,28 @@
 import optparse
 
-from qpid.messaging import Connection, MessagingError
+from proton import *
 
 parser = optparse.OptionParser(
-    "usage: %prog [broker url]",
+    "usage: %prog <address>",
     description="Receive published events from simulators")
-parser.add_option("-a", "--address", default="amq.topic",
-                  help="Receive events on the given address")
 opts, args = parser.parse_args()
 
-broker = args and args.pop(0) or "localhost:5672"
+mng = Messenger()
+mng.start()
 
-connection = Connection(broker)
-try:
-    connection.open()
-    session = connection.session()
-    receiver = session.receiver(opts.address)
+for a in args:
+    print a
+    mng.subscribe(a)
 
-    while True:
-        message = receiver.fetch()
-        print message.content
-        session.acknowledge()
+msg = Message()
+while True:
+    mng.recv()
+    while mng.incoming:
+        try:
+            mng.get(msg)
+        except Exception, e:
+            print e
+        else:
+            print msg.address, msg.subject or "(no subject)", msg.properties, msg.body
 
-except MessagingError, e:
-    print e
-
-connection.close()
+mng.stop()

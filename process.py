@@ -4,7 +4,7 @@ import optparse
 
 from null import Null
 
-from qpid.messaging import Connection, Message, MessagingError
+from proton import *
 
 import model
 
@@ -12,10 +12,8 @@ import model
 parser = optparse.OptionParser(
     "usage: %prog [options] <model.dot>",
     description="Simulate a process moving within the given model")
-parser.add_option("-b", "--broker", default=None,
-                  help="If provided, events are published to the broker")
-parser.add_option("-a", "--address", default="amq.topic",
-                  help="Published events are sent to the given address")
+parser.add_option("-a", "--address", default=None,
+                  help="AMQP 1.0 address, e.g. amqp://0.0.0.0")
 parser.add_option("-i", "--identity", default=None,
                   help="Identity of this process")
 parser.add_option("-s", "--seed", default=None,
@@ -51,13 +49,10 @@ def next(node):
 def move(node):
     return random.choice(filter(lambda n: n.name != node.name, node.edges.keys()))
 
-connection = opts.broker and Connection(opts.broker) or Null()
+mng = opts.address and Messenger() or Null()
+mng.start()
 
 try:
-    connection.open()
-    session = connection.session()
-    sender = session.sender(opts.address)
-
     node = random.choice(nodes)
     if opts.location:
         node = reduce(lambda n, x: n.name == opts.location and n or x, nodes)
@@ -66,11 +61,15 @@ try:
     acceleration = 10
     move_barrier = 30 * 60 # in seconds
     distance = node.size
+    msg = Message()
     while opts.count < 0 or opts.count > 0:
         event = [id, now, node.name]
         if not opts.quiet:
             print ",".join(map(str,event))
-        sender.send(Message(event))
+        msg.address = opts.address
+        msg.body = event
+        mng.put(msg)
+        mng.send()
         if distance:
             distance-=1
         else:
@@ -82,4 +81,4 @@ try:
 except MessagingError, e:
     print e
 
-connection.close()
+mng.stop()
