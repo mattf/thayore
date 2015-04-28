@@ -1,5 +1,7 @@
 import optparse
 
+import json
+
 from proton import *
 
 parser = optparse.OptionParser(
@@ -11,7 +13,6 @@ mng = Messenger()
 mng.start()
 
 for a in args:
-    print a
     mng.subscribe(a)
 
 msg = Message()
@@ -23,6 +24,6 @@ while True:
         except Exception, e:
             print e
         else:
-            print msg.address, msg.subject or "(no subject)", msg.properties, msg.body
+            print json.dumps(msg.properties)
 
 mng.stop()
